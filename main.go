@@ -1,5 +1,7 @@
 package main
 
+// ev på onsdag = post och put
+
 import (
 	"encoding/json"
 	"fmt"
@@ -7,6 +9,12 @@ import (
 	"log"
 	"net/http"
 )
+
+type Posts []struct {
+	ID    string `json:"id"`
+	Title string `json:"title"`
+	Views int    `json:"views"`
+}
 
 // https://mholt.github.io/json-to-go/
 
@@ -24,7 +32,8 @@ type Producter []struct {
 }
 
 func main() {
-	url := "https://fakestoreapi.com/products"
+	//url := "https://fakestoreapi.com/products"
+	url := "http://localhost:3000/posts"
 
 	res, getErr := http.Get(url)
 	if getErr != nil {
@@ -34,14 +43,17 @@ func main() {
 	if readErr != nil {
 		log.Fatal(readErr)
 	}
-	fmt.Println(string(body))
-	data_obj := Producter{}
+	//fmt.Println(string(body))
+
+	//data_obj := Producter{}
+	data_obj := Posts{}
+
 	jsonErr := json.Unmarshal(body, &data_obj)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
-	for key, value := range data_obj {
-		fmt.Println(key)
-		fmt.Println(value.Title)
+	for _, value := range data_obj {
+		//fmt.Println(key)
+		fmt.Printf("%v %v %v\n", value.ID, value.Title, value.Views)
 	}
 }
