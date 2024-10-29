@@ -55,6 +55,6 @@ func main() {
 	for _, value := range data_obj {
 		//fmt.Printf("%v %v %v %v %v %v %v %v\n", value.ID, value.Title, value.Price, value.Description, value.Category, value.Image, value.Rating.Rate, value.Rating.Count)
 		fmt.Printf("ID: %s, Title: %s, Views: %d\n", value.ID, value.Title, value.Views)
-
+		fmt.Println("Done.")
 	}
 }
